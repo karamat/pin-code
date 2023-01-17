@@ -8,7 +8,8 @@ function App() {
   const [values, setValues] = useState<{ [key: string]: InputType }>({});
 
   const handleChangeInput = (value: string, index: number) => {
-    setValues({ ...values, [index]: value });
+    let acceptedValue = value.replace(/\D/, '');
+    setValues({ ...values, [index]: acceptedValue });
   };
 
   console.log(JSON.stringify(values, null, 2));
