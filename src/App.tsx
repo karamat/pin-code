@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ClipboardEvent, useState } from 'react';
 import Input from './components/Input';
 import { InputType } from './types';
 import { KEY_CODES } from './utils/constants';
@@ -18,6 +18,18 @@ function App() {
     setValues({ ...values, [index]: acceptedValue });
     if (acceptedValue.length !== 0 && (focusedIndex || 0) < pinLength - 1)
       setFocusedIndex(index + 1);
+  };
+
+  const handlePaste = (event: ClipboardEvent) => {
+    let pastedData = event.clipboardData.getData('text');
+    if (pastedData && pastedData.length > 0) {
+      let pastedDataArray = pastedData.split('');
+      let pastedValues: { [key: string]: InputType } = {};
+      for (let index = 0; index < pastedDataArray.length; index++) {
+        pastedValues[index] = pastedDataArray[index];
+      }
+      setValues(pastedValues);
+    }
   };
 
   const changeFocus = (key: string) => {
@@ -59,6 +71,7 @@ function App() {
             handleChangeInput={handleChangeInput}
             changeFocus={changeFocus}
             hidden={isHidden}
+            handlePaste={handlePaste}
           />
         ))}
       </div>

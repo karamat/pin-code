@@ -1,4 +1,10 @@
-import React, { KeyboardEvent, useEffect, useRef, RefObject } from 'react';
+import React, {
+  ClipboardEvent,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+  RefObject,
+} from 'react';
 import { InputType } from './../../types';
 import { KEY_CODES } from '../../utils/constants';
 import './styles.css';
@@ -10,6 +16,7 @@ interface Props {
   hidden: boolean;
   handleChangeInput: (value: string, index: number) => void;
   changeFocus: (key: string) => void;
+  handlePaste: (event: ClipboardEvent) => void;
 }
 
 const Input: React.FC<Props> = ({
@@ -19,6 +26,7 @@ const Input: React.FC<Props> = ({
   hidden,
   handleChangeInput,
   changeFocus,
+  handlePaste,
 }) => {
   const ref: any = useRef();
 
@@ -45,6 +53,7 @@ const Input: React.FC<Props> = ({
       value={value}
       onChange={(e) => handleChangeInput(e.target.value, index)}
       onKeyDown={handleKeyDown}
+      onPaste={handlePaste}
     />
   );
 };
