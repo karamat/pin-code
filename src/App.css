@@ -1,10 +1,10 @@
 .App {
-  text-align: center;
+  width: 800px;
+  margin: 0 auto;
 }
 
 .input-list {
   display: flex;
-  justify-content: center;
   align-items: center;
   gap: 8px;
 }

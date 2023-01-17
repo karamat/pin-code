@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import './styles.css';
 
-const Input: React.FC = () => {
-  return (
-    <div>Input</div>
-  )
+interface Props {
+  index: number;
 }
 
-export default Input
+const Input: React.FC<Props> = ({ index }) => {
+  return (
+    <input
+      className='input'
+      name={`pin-number-${index}`}
+    />
+  );
+};
+
+export default Input;
