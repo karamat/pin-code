@@ -8,11 +8,13 @@ function App() {
   const [pinLength, setPinLength] = useState<number>(5);
   const [values, setValues] = useState<{ [key: string]: InputType }>({});
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState<boolean>(false);
   const [defaultValue, setDefaultValue] = useState<string | undefined>();
+  const [allowAlphabets, setAllowAlphabets] = useState<boolean>(false);
 
   const handleChangeInput = (value: string, index: number) => {
-    let acceptedValue = value.replace(/\D/, '');
+    let acceptedValue = value;
+    if (!allowAlphabets) acceptedValue = value.replace(/\D/, '');
     setValues({ ...values, [index]: acceptedValue });
     if (acceptedValue.length !== 0 && (focusedIndex || 0) < pinLength - 1)
       setFocusedIndex(index + 1);
@@ -40,6 +42,7 @@ function App() {
     setPinLength(parseInt(value, 10));
   };
   const handleDefaultValueChange = (value: string) => setDefaultValue(value);
+  const handleAllowAlphabetsChange = () => setAllowAlphabets(!allowAlphabets);
 
   return (
     <div className='App'>
@@ -98,6 +101,18 @@ function App() {
               autoComplete='none'
               onChange={(e) => handleDefaultValueChange(e.target.value)}
             />
+          </label>
+        </div>
+
+        <div className='input-field'>
+          <label htmlFor='allow-alphabets'>
+            <input
+              type='checkbox'
+              name='allow-alphabets'
+              checked={allowAlphabets}
+              onChange={handleAllowAlphabetsChange}
+            />
+            Allow alphabetic characters and symbols
           </label>
         </div>
 
