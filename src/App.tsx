@@ -32,9 +32,6 @@ function App() {
     }
   };
 
-  // console.log(JSON.stringify(values, null, 2));
-  console.log('focusedIndex', focusedIndex);
-
   return (
     <div className='App'>
       <p>Please enter pin code</p>

@@ -27,15 +27,11 @@ const Input: React.FC<Props> = ({
   const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     const { ARROW_LEFT, ARROW_RIGHT, BACKSPACE } = KEY_CODES;
 
-    console.log(event.key);
-
     if ([ARROW_LEFT, ARROW_RIGHT, BACKSPACE].includes(event.key)) {
       changeFocus(event.key);
+    } else {
+      event.preventDefault();
     }
-
-    // if (!REGEXS.DIGITS.test(event.key)) {
-    //   event.preventDefault();
-    // }
   };
 
   return (
