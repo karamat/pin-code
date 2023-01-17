@@ -3,5 +3,6 @@
   width: 36px;
   height: 36px;
   font-size: 24px;
-  font-weight: 300;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

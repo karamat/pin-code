@@ -7,6 +7,7 @@ interface Props {
   index: number;
   value: InputType;
   isFocused: boolean;
+  hidden: boolean;
   handleChangeInput: (value: string, index: number) => void;
   changeFocus: (key: string) => void;
 }
@@ -15,6 +16,7 @@ const Input: React.FC<Props> = ({
   index,
   value,
   isFocused,
+  hidden,
   handleChangeInput,
   changeFocus,
 }) => {
@@ -29,8 +31,6 @@ const Input: React.FC<Props> = ({
 
     if ([ARROW_LEFT, ARROW_RIGHT, BACKSPACE].includes(event.key)) {
       changeFocus(event.key);
-    } else {
-      event.preventDefault();
     }
   };
 
@@ -39,6 +39,7 @@ const Input: React.FC<Props> = ({
       ref={ref}
       className='input'
       name={`pin-number-${index}`}
+      type={hidden ? 'password' : 'text'}
       maxLength={1}
       autoComplete={'nope'}
       value={value}

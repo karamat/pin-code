@@ -8,6 +8,7 @@ function App() {
   const [pinLength, setPinLength] = useState(5);
   const [values, setValues] = useState<{ [key: string]: InputType }>({});
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+  const [isHidden, setIsHidden] = useState(false);
 
   const handleChangeInput = (value: string, index: number) => {
     let acceptedValue = value.replace(/\D/, '');
@@ -32,9 +33,13 @@ function App() {
     }
   };
 
+  const handleIsHidden = () => setIsHidden(!isHidden);
+
   return (
     <div className='App'>
-      <p>Please enter pin code</p>
+      <div className='label'>
+        <label>Please enter pin code</label>
+      </div>
       <div className='input-list'>
         {Array.from(Array(pinLength).keys()).map((_, index) => (
           <Input
@@ -44,8 +49,22 @@ function App() {
             isFocused={index === focusedIndex}
             handleChangeInput={handleChangeInput}
             changeFocus={changeFocus}
+            hidden={isHidden}
           />
         ))}
+      </div>
+      <div className='settings'>
+        <div className='input-field'>
+          <label htmlFor='isHidden'>
+            <input
+              type='checkbox'
+              name='isHidden'
+              checked={isHidden}
+              onChange={handleIsHidden}
+            />
+            Hide
+          </label>
+        </div>
       </div>
     </div>
   );
