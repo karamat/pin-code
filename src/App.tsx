@@ -6,10 +6,12 @@ import './App.css';
 function App() {
   const [pinLength, setPinLength] = useState(5);
   const [values, setValues] = useState<{ [key: string]: InputType }>({});
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
   const handleChangeInput = (value: string, index: number) => {
     let acceptedValue = value.replace(/\D/, '');
     setValues({ ...values, [index]: acceptedValue });
+    if (acceptedValue.length !== 0) setFocusedIndex(index + 1);
   };
 
   console.log(JSON.stringify(values, null, 2));
@@ -20,8 +22,10 @@ function App() {
       <div className='input-list'>
         {Array.from(Array(pinLength).keys()).map((_, index) => (
           <Input
+            key={index}
             index={index}
             value={values[index]}
+            isFocused={index === focusedIndex}
             handleChangeInput={handleChangeInput}
           />
         ))}
