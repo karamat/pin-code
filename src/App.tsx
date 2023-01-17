@@ -1,4 +1,4 @@
-import React, { ClipboardEvent, useState } from 'react';
+import React, { ClipboardEvent, useEffect, useState } from 'react';
 import Input from './components/Input';
 import { InputType } from './types';
 import { KEY_CODES } from './utils/constants';
@@ -11,6 +11,18 @@ const App: React.FC = () => {
   const [isHidden, setIsHidden] = useState<boolean>(false);
   const [defaultValue, setDefaultValue] = useState<string | undefined>();
   const [allowAlphabets, setAllowAlphabets] = useState<boolean>(false);
+  const [isValidPin, setIsValidPin] = useState<boolean>(false);
+
+  useEffect(() => {
+    let isPinCodeValid = true;
+    for (let index = 0; index < pinLength; index++) {
+      if (!values[index]) {
+        isPinCodeValid = false;
+        break;
+      }
+    }
+    setIsValidPin(isPinCodeValid);
+  }, [values]);
 
   const handleChangeInput = (value: string, index: number) => {
     let acceptedValue = value;
@@ -76,6 +88,9 @@ const App: React.FC = () => {
           />
         ))}
       </div>
+      {isValidPin && (
+        <div className='success'>You have entered a valid pin code.</div>
+      )}
       <div className='settings'>
         <div className='input-field'>
           <label htmlFor='isHidden'>

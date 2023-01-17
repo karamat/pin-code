@@ -43,6 +43,7 @@ const Input: React.FC<Props> = ({
     setFocusedIndex(index);
   };
 
+
   return (
     <input
       ref={ref}

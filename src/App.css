@@ -7,7 +7,8 @@
 }
 
 .label {
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  font-weight: bold;
 }
 
 .label label {
@@ -20,6 +21,12 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
+}
+
+.success {
+  margin-bottom: 16px;
+  color: #0bc70b;
+  font-size: 14px;
 }
 
 .input-field {
