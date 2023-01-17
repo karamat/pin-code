@@ -1,10 +1,4 @@
-import React, {
-  ClipboardEvent,
-  KeyboardEvent,
-  useEffect,
-  useRef,
-  RefObject,
-} from 'react';
+import React, { ClipboardEvent, KeyboardEvent, useEffect, useRef } from 'react';
 import { InputType } from './../../types';
 import { KEY_CODES } from '../../utils/constants';
 import './styles.css';
@@ -54,6 +48,7 @@ const Input: React.FC<Props> = ({
       onChange={(e) => handleChangeInput(e.target.value, index)}
       onKeyDown={handleKeyDown}
       onPaste={handlePaste}
+      autoFocus={true}
     />
   );
 };

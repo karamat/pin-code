@@ -4,10 +4,10 @@ import { InputType } from './types';
 import { KEY_CODES } from './utils/constants';
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
   const [pinLength, setPinLength] = useState<number>(5);
   const [values, setValues] = useState<{ [key: string]: InputType }>({});
-  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
+  const [focusedIndex, setFocusedIndex] = useState<number | null>(0);
   const [isHidden, setIsHidden] = useState<boolean>(false);
   const [defaultValue, setDefaultValue] = useState<string | undefined>();
   const [allowAlphabets, setAllowAlphabets] = useState<boolean>(false);
@@ -66,7 +66,7 @@ function App() {
           <Input
             key={index}
             index={index}
-            value={defaultValue || values[index]}
+            value={values[index] || defaultValue}
             isFocused={index === focusedIndex}
             handleChangeInput={handleChangeInput}
             changeFocus={changeFocus}
@@ -137,6 +137,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
