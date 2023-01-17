@@ -56,7 +56,6 @@ const Input: React.FC<Props> = ({
       onChange={(e) => handleChangeInput(e.target.value, index)}
       onKeyDown={handleKeyDown}
       onPaste={handlePaste}
-      autoFocus={true}
       onFocus={handleFocus}
     />
   );
