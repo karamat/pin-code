@@ -10,6 +10,8 @@ const Input: React.FC<Props> = ({ index }) => {
     <input
       className='input'
       name={`pin-number-${index}`}
+      maxLength={1}
+      autoComplete={'nope'}
     />
   );
 };
