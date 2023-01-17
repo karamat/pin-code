@@ -5,7 +5,7 @@ import { KEY_CODES } from './utils/constants';
 import './App.css';
 
 function App() {
-  const [pinLength, setPinLength] = useState(5);
+  const [pinLength, setPinLength] = useState<number>(5);
   const [values, setValues] = useState<{ [key: string]: InputType }>({});
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const [isHidden, setIsHidden] = useState(false);
@@ -34,6 +34,10 @@ function App() {
   };
 
   const handleIsHidden = () => setIsHidden(!isHidden);
+  const handlePinLengthChange = (value: string) => {
+    if (isNaN(parseInt(value, 10))) return;
+    setPinLength(parseInt(value, 10));
+  };
 
   return (
     <div className='App'>
@@ -63,6 +67,21 @@ function App() {
               onChange={handleIsHidden}
             />
             Hide
+          </label>
+        </div>
+
+        <div className='input-field'>
+          <label htmlFor='isHidden'>
+            Pin code length
+            <input
+              type='number'
+              min={1}
+              step={1}
+              name='pin-length'
+              value={pinLength}
+              autoComplete='none'
+              onChange={(e) => handlePinLengthChange(e.target.value)}
+            />
           </label>
         </div>
       </div>
