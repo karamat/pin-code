@@ -9,6 +9,7 @@ function App() {
   const [values, setValues] = useState<{ [key: string]: InputType }>({});
   const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
   const [isHidden, setIsHidden] = useState(false);
+  const [defaultValue, setDefaultValue] = useState<string | undefined>();
 
   const handleChangeInput = (value: string, index: number) => {
     let acceptedValue = value.replace(/\D/, '');
@@ -38,6 +39,7 @@ function App() {
     if (isNaN(parseInt(value, 10))) return;
     setPinLength(parseInt(value, 10));
   };
+  const handleDefaultValueChange = (value: string) => setDefaultValue(value);
 
   return (
     <div className='App'>
@@ -49,7 +51,7 @@ function App() {
           <Input
             key={index}
             index={index}
-            value={values[index]}
+            value={defaultValue || values[index]}
             isFocused={index === focusedIndex}
             handleChangeInput={handleChangeInput}
             changeFocus={changeFocus}
@@ -71,7 +73,7 @@ function App() {
         </div>
 
         <div className='input-field'>
-          <label htmlFor='isHidden'>
+          <label htmlFor='pin-length'>
             Pin code length
             <input
               type='number'
@@ -84,6 +86,26 @@ function App() {
             />
           </label>
         </div>
+
+        <div className='input-field'>
+          <label htmlFor='default-value'>
+            Fill with default value
+            <input
+              type='text'
+              maxLength={1}
+              name='pin-length'
+              value={defaultValue}
+              autoComplete='none'
+              onChange={(e) => handleDefaultValueChange(e.target.value)}
+            />
+          </label>
+        </div>
+
+        <hr />
+
+        <p className='helping-text'>
+          * When a default value is specified, then you can't edit the inputs
+        </p>
       </div>
     </div>
   );

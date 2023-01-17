@@ -26,9 +26,18 @@
   margin-bottom: 16px;
 }
 
-.input-field input[type="number"] {
+.input-field input {
   margin-left: 4px;
   padding: 4px;
   border: 1px solid #ccc;
   border-radius: 4px;
+}
+
+hr {
+  opacity: 0.3;
+}
+
+.helping-text {
+  font-size: 13px;
+  color: #666;
 }
