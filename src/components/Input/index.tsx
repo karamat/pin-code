@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, RefObject } from 'react';
+import React, { KeyboardEvent, useEffect, useRef, RefObject } from 'react';
 import { InputType } from './../../types';
+import { KEY_CODES } from '../../utils/constants';
 import './styles.css';
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
   value: InputType;
   isFocused: boolean;
   handleChangeInput: (value: string, index: number) => void;
+  changeFocus: (key: string) => void;
 }
 
 const Input: React.FC<Props> = ({
@@ -14,12 +16,27 @@ const Input: React.FC<Props> = ({
   value,
   isFocused,
   handleChangeInput,
+  changeFocus,
 }) => {
   const ref: any = useRef();
 
   useEffect(() => {
     isFocused && ref.current.focus();
   }, [isFocused]);
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    const { ARROW_LEFT, ARROW_RIGHT, BACKSPACE } = KEY_CODES;
+
+    console.log(event.key);
+
+    if ([ARROW_LEFT, ARROW_RIGHT, BACKSPACE].includes(event.key)) {
+      changeFocus(event.key);
+    }
+
+    // if (!REGEXS.DIGITS.test(event.key)) {
+    //   event.preventDefault();
+    // }
+  };
 
   return (
     <input
@@ -30,6 +47,7 @@ const Input: React.FC<Props> = ({
       autoComplete={'nope'}
       value={value}
       onChange={(e) => handleChangeInput(e.target.value, index)}
+      onKeyDown={handleKeyDown}
     />
   );
 };
