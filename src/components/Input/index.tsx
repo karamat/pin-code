@@ -5,9 +5,10 @@ import './styles.css';
 interface Props {
   index: number;
   value: InputType;
+  handleChangeInput: (value: string, index: number) => void;
 }
 
-const Input: React.FC<Props> = ({ index, value }) => {
+const Input: React.FC<Props> = ({ index, value, handleChangeInput }) => {
   return (
     <input
       className='input'
@@ -15,6 +16,7 @@ const Input: React.FC<Props> = ({ index, value }) => {
       maxLength={1}
       autoComplete={'nope'}
       value={value}
+      onChange={(e) => handleChangeInput(e.target.value, index)}
     />
   );
 };
