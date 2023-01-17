@@ -66,8 +66,9 @@ const App: React.FC = () => {
           <Input
             key={index}
             index={index}
-            value={values[index] || defaultValue}
+            value={defaultValue || values[index]}
             isFocused={index === focusedIndex}
+            setFocusedIndex={setFocusedIndex}
             handleChangeInput={handleChangeInput}
             changeFocus={changeFocus}
             hidden={isHidden}

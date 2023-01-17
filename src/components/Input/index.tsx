@@ -7,6 +7,7 @@ interface Props {
   index: number;
   value: InputType;
   isFocused: boolean;
+  setFocusedIndex: (value: number) => void;
   hidden: boolean;
   handleChangeInput: (value: string, index: number) => void;
   changeFocus: (key: string) => void;
@@ -17,6 +18,7 @@ const Input: React.FC<Props> = ({
   index,
   value,
   isFocused,
+  setFocusedIndex,
   hidden,
   handleChangeInput,
   changeFocus,
@@ -36,6 +38,11 @@ const Input: React.FC<Props> = ({
     }
   };
 
+  const handleFocus = (event: any) => {
+    event.target.setSelectionRange(0, 1);
+    setFocusedIndex(index);
+  };
+
   return (
     <input
       ref={ref}
@@ -49,6 +56,7 @@ const Input: React.FC<Props> = ({
       onKeyDown={handleKeyDown}
       onPaste={handlePaste}
       autoFocus={true}
+      onFocus={handleFocus}
     />
   );
 };
